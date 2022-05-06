@@ -1,12 +1,23 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
 .header {
-  background-color: rgb(165, 15, 15);
+  background-color: rgb(68, 16, 140);
   color: rgb(252, 248, 248);
-  margin: -15px;
-  padding: 20px;
+}
+body {
+  background-image: url("https://cdn1.vectorstock.com/i/1000x1000/50/05/abstract-neon-city-vector-23465005.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 .center {
   text-align: center;
 }
-.addRutine {
-  cursor: pointer;
+.description {
+  height: 50px;
+  color: white;
+  box-shadow: 20px;
 }
