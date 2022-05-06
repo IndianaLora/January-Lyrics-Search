@@ -1,0 +1,12 @@
+.header {
+  background-color: rgb(165, 15, 15);
+  color: rgb(252, 248, 248);
+  margin: -15px;
+  padding: 20px;
+}
+.center {
+  text-align: center;
+}
+.addRutine {
+  cursor: pointer;
+}
