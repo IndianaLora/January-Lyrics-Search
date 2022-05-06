@@ -1,6 +1,7 @@
 
 import './App.css';
 import { useState, useEffect } from "react";
+// import {useForm} from 
 function App() {
   const artist = "Rosalia";
   const song = "Con altura";
@@ -9,7 +10,7 @@ function App() {
   const lyricsFetcher = async () => {
     const response = await fetch(`${apiUrl}`);
     const data = await response.json();
-    console.log(data)
+    setLyrics(data.lyrics)
   }
   const [lyrics, setLyrics] = useState([])
   useEffect(() => {
@@ -21,6 +22,10 @@ function App() {
         <h1 className="center header">Welcome to January</h1>
       </header>
       <h3 className='description center'>Song searcher</h3>
+      <div className='lyrics-container'>
+        <h1 className='song-tittle'>{artist}:{song}</h1>
+        <p>{lyrics.length < 0 ? "Sorry we cant find your song" : lyrics}</p>
+      </div>
     </div>
   );
 }

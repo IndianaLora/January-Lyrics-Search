@@ -3,11 +3,11 @@
   padding: 0%;
 }
 .header {
-  background-color: rgb(68, 16, 140);
+  background-color: rgb(64, 172, 234);
   color: rgb(252, 248, 248);
 }
 body {
-  background-image: url("https://cdn1.vectorstock.com/i/1000x1000/50/05/abstract-neon-city-vector-23465005.jpg");
+  background-image: url("./img/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -20,4 +20,18 @@ body {
   height: 50px;
   color: white;
   box-shadow: 20px;
+}
+.lyrics-container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 500px;
+  height: fit-content;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(1, 1, 48);
+  background-color: white;
+}
+.song-tittle {
+  color: rgb(42, 26, 81);
 }
