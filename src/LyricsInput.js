@@ -6,14 +6,15 @@ export default function LyricsInput() {
     const { handleSubmit, register } = useForm();
     const onSubmit = values => console.log(values);
     return (
-        <div className="songSearcher-form">
-            <h3 className="description center">Song searcher</h3>
+        <div className="songSearcher-form-container">
             <form onSubmit={handleSubmit(onSubmit)} >
-                <input placeholder="Type the artist"></input>
-                <input placeholder="Type the song"></input>
-                <button>Search</button>
+                <input placeholder="Artist"></input>
+                <input placeholder="Song"></input>
+                <div class="wrapper">
+                    <button><span>Search</span></button>
+                </div>
             </form>
-        </div>
+        </div >
 
     )
 
