@@ -4,23 +4,28 @@ import { useForm } from "react-hook-form";
 import Header from "./Header";
 
 function App() {
-
-
   const { handleSubmit, register } = useForm();
   const [lyrics, setLyrics] = useState([]);
-  const [artist, setArtist] = useState([]);
-  const [song, setSong] = useState([]);
+  // const [artist, setArtist] = useState("Rosalia");
+  //const [song, setSong] = useState("Malamente");\
+  let artist = "Rosalia";
+  let song = "Malamente";
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (values) => {
-    setSong(values.song);
-    setArtist(values.artist);
-    console.log(values)
+    // setSong(values.song);
+    // setArtist(values.artist);
+    console.log(values);
   };
+  //Arreglar este con mejor practica
   const lyricsFetcher = async () => {
-    const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`);
+    setLoading(true);
+    const response = await fetch(
+      `https://api.lyrics.ovh/v1/${artist}/${song}`);
     const data = await response.json();
     setLyrics(data.lyrics);
-    console.log(data.lyrics)
+    console.log(data.lyrics);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -53,6 +58,7 @@ function App() {
         <h1 className="song-tittle">
           {artist}:{song}
         </h1>
+        <p>{loading ? "Loading..." : ""}</p>
         <p>{lyrics.length < 0 ? "Sorry we cant find your song" : lyrics}</p>
       </div>
     </div>
