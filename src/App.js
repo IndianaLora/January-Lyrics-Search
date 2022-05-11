@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Header from "./Header";
+import Loading from "./loading/Loading";
 
 function App() {
   const { handleSubmit, register } = useForm();
@@ -58,7 +59,7 @@ function App() {
         <h1 className="song-tittle">
           {artist}:{song}
         </h1>
-        <p>{loading ? "Loading..." : ""}</p>
+        <p>{loading ? <Loading /> : ""}</p>
         <p>{lyrics.length < 0 ? "Sorry we cant find your song" : lyrics}</p>
       </div>
     </div>
