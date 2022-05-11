@@ -7,7 +7,7 @@ import Loading from "./loading/Loading";
 function App() {
   const { handleSubmit, register } = useForm();
   const [lyrics, setLyrics] = useState([]);
-  // const [artist, setArtist] = useState("Rosalia");
+  //const [artist, setArtist] = useState("Rosalia");
   //const [song, setSong] = useState("Malamente");\
   let artist = "Rosalia";
   let song = "Malamente";
@@ -18,9 +18,9 @@ function App() {
     // setArtist(values.artist);
     console.log(values);
   };
-  //Arreglar este con mejor practica
   const lyricsFetcher = async () => {
     setLoading(true);
+    debugger
     const response = await fetch(
       `https://api.lyrics.ovh/v1/${artist}/${song}`);
     const data = await response.json();
@@ -60,7 +60,7 @@ function App() {
           {artist}:{song}
         </h1>
         <p>{loading ? <Loading /> : ""}</p>
-        <p>{lyrics.length < 0 ? "Sorry we cant find your song" : lyrics}</p>
+        <pre>{lyrics === undefined || lyrics.length > 0 ? "Sorry we cant find your song" : lyrics}</pre>
       </div>
     </div>
   );
