@@ -4,25 +4,24 @@ import { useForm } from "react-hook-form";
 import Header from "./Header";
 
 function App() {
-  let artist = "Rosalia";
-  let song = "Con altura";
-  let apiUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+
 
   const { handleSubmit, register } = useForm();
+  const [lyrics, setLyrics] = useState([]);
+  const [artist, setArtist] = useState([]);
+  const [song, setSong] = useState([]);
 
   const onSubmit = (values) => {
-    //make it dinamic
-    // let artist = "Rosalia";
-    // let song = "Con altura";
-    // let apiUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+    setSong(values.song);
+    setArtist(values.artist);
     console.log(values)
   };
   const lyricsFetcher = async () => {
-    const response = await fetch(`${apiUrl}`);
+    const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`);
     const data = await response.json();
     setLyrics(data.lyrics);
+    console.log(data.lyrics)
   };
-  const [lyrics, setLyrics] = useState([]);
 
   useEffect(() => {
     lyricsFetcher();
