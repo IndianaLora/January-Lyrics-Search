@@ -1,26 +1,24 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Header from "./Header";
 import Loading from "./loading/Loading";
-
+//Persistencia por url
 function App() {
   const { handleSubmit, register } = useForm();
   const [lyrics, setLyrics] = useState([]);
-  //const [artist, setArtist] = useState("Rosalia");
-  //const [song, setSong] = useState("Malamente");\
-  let artist = "Rosalia";
-  let song = "Malamente";
+  const [artist, setArtist] = useState([]);
+  const [song, setSong] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (values) => {
-    // setSong(values.song);
-    // setArtist(values.artist);
+    setSong(values.song);
+    setArtist(values.artist);
     console.log(values);
+    lyricsFetcher(values.artist, values.song);
   };
-  const lyricsFetcher = async () => {
+  const lyricsFetcher = async (artist, song) => {
     setLoading(true);
-    debugger
     const response = await fetch(
       `https://api.lyrics.ovh/v1/${artist}/${song}`);
     const data = await response.json();
@@ -28,11 +26,6 @@ function App() {
     console.log(data.lyrics);
     setLoading(false);
   };
-
-  useEffect(() => {
-    lyricsFetcher();
-  }, []);
-
   return (
     <div className="App">
       <Header />
@@ -60,7 +53,7 @@ function App() {
           {artist}:{song}
         </h1>
         <p>{loading ? <Loading /> : ""}</p>
-        <pre>{lyrics === undefined || lyrics.length > 0 ? "Sorry we cant find your song" : lyrics}</pre>
+        <pre>{lyrics === undefined || lyrics.length < 0 ? "Sorry we cant find your song" : lyrics}</pre>
       </div>
     </div>
   );
