@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Header from "./Header";
 import Loading from "./loading/Loading";
-
+import Audio from "./Audio/Audio";
 //Persistencia por url
 //Did you mean ?????
 // has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the
 // request's mode to 'no-cors' to fetch the resource with CORS disabled.
- function App() {
+function App() {
   const { handleSubmit, register } = useForm();
   const [lyrics, setLyrics] = useState([]);
   const [artist, setArtist] = useState([]);
@@ -46,6 +46,7 @@ import Loading from "./loading/Loading";
         <h1 className="song-tittle">
           {artist}:{song}
         </h1>
+        <Audio artist={artist} song={song} />
         <p>{loading ? <Loading /> : ""}</p>
         <pre>
           {lyrics === undefined || lyrics.length < 0

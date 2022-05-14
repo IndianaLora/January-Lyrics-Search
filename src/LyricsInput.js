@@ -1,9 +1,19 @@
-// //rfce
+// import { useState } from "react";
+// import { useForm } from "react-hook-form";
 
-
-// export default function LyricsInput() {
+//  export default function LyricsInput() {
 //     const { handleSubmit, register } = useForm();
-//     const onSubmit = (values) => console.log(values);
+  
+//     const [artist, setArtist] = useState([]);
+//     const [song, setSong] = useState([]);
+    
+//     let url = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+//     const onSubmit = (values) => {
+//       setSong(values.song);
+//       setArtist(values.artist);
+//       lyricsFetcher(values.artist, values.song);
+//     };
+    
 //     return (
 //         <div className="songSearcher-form-container">
 //             <form onSubmit={handleSubmit(onSubmit)}>
