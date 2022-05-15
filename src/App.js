@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Header from "./Header";
 import Loading from "./loading/Loading";
-import Audio from "./Audio/Audio";
+import ArtistImage from "./ArtistImage/ArtistImage";
+import DefaultImage from "./Default/DefaultImage";
 //Persistencia por url
 //Did you mean ?????
 // has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the
@@ -14,12 +15,15 @@ function App() {
   const [artist, setArtist] = useState([]);
   const [song, setSong] = useState([]);
   const [loading, setLoading] = useState(false);
+
   let url = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+
   const onSubmit = (values) => {
     setSong(values.song);
     setArtist(values.artist);
     lyricsFetcher(values.artist, values.song);
   };
+
   const lyricsFetcher = async (artist, song) => {
     setLoading(true);
     const response = await fetch(`${url}`);
@@ -43,10 +47,10 @@ function App() {
         </form>
       </div>
       <div className="lyrics-container">
+        {artist.length <= 0 || loading === true ? <DefaultImage /> : <ArtistImage artist={artist} />}
         <h1 className="song-tittle">
           {artist}:{song}
         </h1>
-        <Audio artist={artist} song={song} />
         <p>{loading ? <Loading /> : ""}</p>
         <pre>
           {lyrics === undefined || lyrics.length < 0

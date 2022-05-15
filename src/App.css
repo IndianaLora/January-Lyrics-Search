@@ -104,3 +104,7 @@ button:hover {
 button:hover:after {
   width: 100%;
 }
+.cover-image {
+  width: 400px;
+  height: 300px;
+}
