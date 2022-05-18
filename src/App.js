@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Header from "./Header";
+import Header from "./Header/Header";
 import Loading from "./loading/Loading";
 import ArtistImage from "./ArtistImage/ArtistImage";
 import DefaultImage from "./Default/DefaultImage";
@@ -51,12 +51,12 @@ function App() {
         <h1 className="song-tittle">
           {artist}:{song}
         </h1>
-        <p>{loading ? <Loading /> : ""}</p>
-        <pre>
+        <p className="artist-name-song">{loading ? <Loading /> : ""}</p>
+        <p className="pre-paragraph">
           {lyrics === undefined || lyrics.length < 0
             ? "Sorry we cant find your song"
             : lyrics}
-        </pre>
+        </p>
       </div>
     </div>
   );
