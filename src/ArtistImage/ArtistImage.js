@@ -13,7 +13,7 @@ export default function ArtistImage(props) {
       "X-RapidAPI-Key": "2d20de1023msh46bfe4da82c4593p1d812ajsn0c499f226d5b",
     },
   };
-  const songFetcher = async () => {
+  const songImage = async () => {
     axios
       .request(options)
       .then(function (response) {
@@ -25,7 +25,7 @@ export default function ArtistImage(props) {
       });
   };
   useEffect(() => {
-    songFetcher();
+    songImage();
   }, []);
   return (
     <div>

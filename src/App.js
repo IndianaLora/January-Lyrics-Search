@@ -1,14 +1,12 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Header from "./Header/Header";
 import Loading from "./loading/Loading";
 import ArtistImage from "./ArtistImage/ArtistImage";
 import DefaultImage from "./Default/DefaultImage";
-//Persistencia por url
-//Did you mean ?????
-// has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the
-// request's mode to 'no-cors' to fetch the resource with CORS disabled.
+const axios = require("axios");
+
 function App() {
   const { handleSubmit, register } = useForm();
   const [lyrics, setLyrics] = useState([]);
@@ -16,22 +14,30 @@ function App() {
   const [song, setSong] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  let url = `https://api.lyrics.ovh/v1/${artist}/${song}`;
-
+  const response = `https://api.lyrics.ovh/v1/${artist}/${song}`;
   const onSubmit = (values) => {
     setSong(values.song);
     setArtist(values.artist);
-    lyricsFetcher(values.artist, values.song);
+    LyricsFetcher(values.artist, values.song);
   };
-
-  const lyricsFetcher = async (artist, song) => {
+  //test the app to search bugs
+  //weather app to the other project
+  const LyricsFetcher = async () => {
     setLoading(true);
-    const response = await fetch(`${url}`);
-    const data = await response.json();
-    setLyrics(data.lyrics);
-    console.log(data.lyrics);
-    setLoading(false);
-  };
+    axios
+      .request(response)
+      .then(function (response) {
+        const data = response.data;
+        setLyrics(data.lyrics);
+        console.log(data.lyrics);
+        setLoading(false);
+      }).catch(function (error) {
+        console.log(error);
+      })
+  }
+  useEffect(() => {
+    LyricsFetcher()
+  }, []);
   return (
     <div className="App">
       <Header />
