@@ -1,11 +1,11 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Header from "./Header/Header";
 import Loading from "./loading/Loading";
 import ArtistImage from "./ArtistImage/ArtistImage";
 import DefaultImage from "./Default/DefaultImage";
-const axios = require("axios");
+
 
 function App() {
   const { handleSubmit, register } = useForm();
@@ -14,37 +14,42 @@ function App() {
   const [song, setSong] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const response = `https://api.lyrics.ovh/v1/${artist}/${song}`;
   const onSubmit = (values) => {
     setSong(values.song);
     setArtist(values.artist);
-    LyricsFetcher(values.artist, values.song);
+    lyricsFetcher(values.artist, values.song);
   };
-  //test the app to search bugs
-  //weather app to the other project
-  const LyricsFetcher = async () => {
+  const lyricsFetcher = async (artist, song) => {
     setLoading(true);
-    axios
-      .request(response)
-      .then(function (response) {
-        const data = response.data;
-        setLyrics(data.lyrics);
-        console.log(data.lyrics);
-        setLoading(false);
-      }).catch(function (error) {
-        console.log(error);
-      })
-  }
-  useEffect(() => {
-    LyricsFetcher()
-  }, []);
+    try {
+      const response = await fetch(
+        `https://api.lyrics.ovh/v1/${artist}/${song}`);
+      const data = await response.json();
+      setLyrics(data.lyrics);
+    } catch (error) {
+      console.log(error + "Bobo")
+    }
+    const response = await fetch(
+      `https://api.lyrics.ovh/v1/${artist}/${song}`);
+    const data = await response.json();
+    setLyrics(data.lyrics);
+    setLoading(false);
+  };
   return (
     <div className="App">
       <Header />
       <div className="songSearcher-form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input placeholder="Artist" required={true} {...register("artist")} />
-          <input placeholder="Song" required={true} {...register("song")} />
+          <input
+            placeholder="Artist"
+            required={true}
+            {...register("artist")}
+          ></input>
+          <input
+            placeholder="Song"
+            required={true}
+            {...register("song")}
+          ></input>
           <div className="wrapper">
             <button>
               <span>Search</span>
@@ -54,15 +59,12 @@ function App() {
       </div>
       <div className="lyrics-container">
         {artist.length <= 0 || loading === true ? <DefaultImage /> : <ArtistImage artist={artist} />}
+        {console.log(artist)}
         <h1 className="song-tittle">
           {artist}:{song}
         </h1>
-        <p className="artist-name-song">{loading ? <Loading /> : ""}</p>
-        <p className="pre-paragraph">
-          {lyrics === undefined || lyrics.length < 0
-            ? "Sorry we cant find your song"
-            : lyrics}
-        </p>
+        <p className="artist-name-song">{loading ? <Loading /> : " "}</p>
+        <pre>{lyrics === undefined || lyrics.length < 0 ? "Sorry we cant find your song" : lyrics}</pre>
       </div>
     </div>
   );

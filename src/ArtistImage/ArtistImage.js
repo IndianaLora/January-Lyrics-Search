@@ -13,20 +13,25 @@ export default function ArtistImage(props) {
       "X-RapidAPI-Key": "2d20de1023msh46bfe4da82c4593p1d812ajsn0c499f226d5b",
     },
   };
-  const songImage = async () => {
+  const SongImage = async () => {
     axios
       .request(options)
       .then(function (response) {
-        setArtistImage(response.data.picture_medium);
+        if (response) {
+          setArtistImage(response.data.picture_medium);
+        }
+
       })
       .catch(function (error) {
         console.error(error);
         setArtistImage("../img/DefaultImg.jpg");
       });
+    useEffect(() => {
+      SongImage();
+    }, [artistImage]);
   };
-  useEffect(() => {
-    songImage();
-  }, []);
+
+
   return (
     <div>
       <img src={artistImage != null ? artistImage : DefaultImg} alt="Artist" />
