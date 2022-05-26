@@ -19,18 +19,17 @@ export default function ArtistImage(props) {
       .then(function (response) {
         if (response) {
           setArtistImage(response.data.picture_medium);
+          console.log(response)
         }
-
       })
       .catch(function (error) {
         console.error(error);
         setArtistImage("../img/DefaultImg.jpg");
       });
-    useEffect(() => {
-      SongImage();
-    }, [artistImage]);
   };
-
+  useEffect(() => {
+    SongImage();
+  }, [artistImage]);
 
   return (
     <div>
