@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/January-Lyrics-Search/static/css/main.f5cf5809.css",
-    "main.js": "/January-Lyrics-Search/static/js/main.9092a446.js",
+    "main.js": "/January-Lyrics-Search/static/js/main.18c36da2.js",
     "static/media/bg.jpg": "/January-Lyrics-Search/static/media/bg.4d56f56cb1a00b35d0f0.jpg",
     "static/media/DefaultImg.jpg": "/January-Lyrics-Search/static/media/DefaultImg.a3d149f6ff1d454c2563.jpg",
     "index.html": "/January-Lyrics-Search/index.html",
     "main.f5cf5809.css.map": "/January-Lyrics-Search/static/css/main.f5cf5809.css.map",
-    "main.9092a446.js.map": "/January-Lyrics-Search/static/js/main.9092a446.js.map"
+    "main.18c36da2.js.map": "/January-Lyrics-Search/static/js/main.18c36da2.js.map"
   },
   "entrypoints": [
     "static/css/main.f5cf5809.css",
-    "static/js/main.9092a446.js"
+    "static/js/main.18c36da2.js"
   ]
 }
