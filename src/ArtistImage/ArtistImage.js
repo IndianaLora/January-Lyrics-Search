@@ -1,10 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useStateIfMounted } from "use-state-if-mounted";
 import DefaultImg from "../img/DefaultImg.jpg";
 const axios = require("axios");
 
 export default function ArtistImage(props) {
-  const [artistImage, setArtistImage] = useState([]);
+  const [artistImage, setArtistImage] = useStateIfMounted("Getting");
   const options = {
     method: "GET",
     url: `https://deezerdevs-deezer.p.rapidapi.com/artist/${props.artist}`,
@@ -19,7 +20,6 @@ export default function ArtistImage(props) {
       .then(function (response) {
         if (response) {
           setArtistImage(response.data.picture_medium);
-          console.log(response)
         }
       })
       .catch(function (error) {
@@ -29,7 +29,7 @@ export default function ArtistImage(props) {
   };
   useEffect(() => {
     SongImage();
-  }, [artistImage]);
+  }, []);
 
   return (
     <div>

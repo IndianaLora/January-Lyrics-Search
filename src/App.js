@@ -15,11 +15,12 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (values) => {
+    setLyrics([])
     setSong(values.song);
     setArtist(values.artist);
-    LyricsFetcher(values.artist, values.song);
+    lyricsFetcher(values.artist, values.song);
   };
-  const LyricsFetcher = async (artist, song) => {
+  const lyricsFetcher = async (artist, song) => {
     setLoading(true);
     try {
       const response = await fetch(
@@ -60,10 +61,10 @@ function App() {
       <div className="lyrics-container">
         {artist.length <= 0 || loading === true ? <DefaultImage /> : <ArtistImage artist={artist} />}
         <h1 className="song-tittle">
-          {artist.charAt(0).toUpperCase() + artist.slice(1)}:{" " + song.charAt(0).toUpperCase() + song.slice(1)}
+          {artist}:{song}
         </h1>
         <p className="artist-name-song">{loading ? <Loading /> : " "}</p>
-        <pre>{lyrics === undefined || lyrics.length < 0 ? "Sorry we cant find your song" : lyrics}</pre>
+        <pre>{lyrics === undefined || lyrics.length < 0 ? "Sorry we cant find your song, make sure you write it well." : lyrics}</pre>
       </div>
     </div>
   );
